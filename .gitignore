@@ -1,3 +1,37 @@
+print("LG CNS 신입사원 전공무관 지원")
+
+import requests
+
+# Define the API endpoint for the repository you want to access
+endpoint = "https://api.github.com/repos/{owner}/{repo}"
+
+# Replace {owner} and {repo} with the owner and repository name respectively
+endpoint = endpoint.format(owner="OWNER", repo="REPO")
+
+# Send a GET request to the API endpoint
+response = requests.get(endpoint)
+
+# Check that the request was successful
+if response.status_code == 200:
+    # Load the response JSON data into a Python dictionary
+    data = response.json()
+
+    # Extract the repository information you are interested in
+    name = data["name"]
+    description = data["description"]
+    forks = data["forks"]
+    stargazers = data["stargazers_count"]
+    
+    # Print the repository information
+    print("Repository:", name)
+    print("Description:", description)
+    print("Forks:", forks)
+    print("Stargazers:", stargazers)
+else:
+    # If the request was not successful, raise an error
+    response.raise_for_status()
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
